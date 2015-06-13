@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fertilizer Spread Rates</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/simplotgray.css" />
+  <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+  <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.4.min.css" /> 
+  <link rel="stylesheet" href="css/custom.css" /> 
+  <script src="js/jquery-1.11.1.min.js"></script> 
+  <script src="js/jquery.knob.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/jquery.mobile-1.4.4.min.js"></script> 
+  <!--Include phonegap.js when compiling for production--> 
+  <!--<script src="phonegap.js"></script>-->
+  <!--Include cordova.js when developing on Ripple-->
+  <script src="js/cordova.js"></script>
+</head>
+<body onload="onLoad()">
+<!-- --------- -->
+<!-- HOME PAGE -->
+<!-- --------- -->
+<div data-role="page" id="one">
+	<div class="img">
+			<img src="img/logo.png" alt="BEST Logo" />
+		</div>
+	<div role="main" class="ui-content">
+		<span class="message"></span>
+		<div class="button-grid">
+			<div class="first-button landingPageBtn">
+				<a href="#selectProd" class="firstOption" data-transition="pop">
+					<img src="img/fert_bag_white.svg" alt="Best Icon"/><span>Select BEST® Product</span>
+				</a>
+			</div>
+			<div class="ui-grid-a">
+	         <div class="second-button landingPageBtn ui-block-a">
+	         	<a href="#enterNit" class="firstOption" data-transition="pop">
+	         		<img src="img/nitrogen.svg" alt="Best Icon"/>
+	         		<span>Enter Nitrogen<br>Percent</span>
+	         	</a>
+	         </div>
+	         <div class="third-button landingPageBtn ui-block-b">
+	         	<a href="#" id="distributorsButton" class="firstOption" onclick="inAppBrowser('http://batchgeo.com/map/180a4f2614047605521d8f04d78f79a0', 'distributors')">
+	         	<!-- <a href="#distributors" id="distributorsButton" class="firstOption" data-transition="pop"> -->
+	         		<span class="distMessage"></span>
+	         		<img src="img/location.svg" alt="Best Icon"/>
+	         		
+					<span>Distributor<br>Locations</span>
+				</a>
+	         </div>
+	        </div>
+		</div><!-- Button Grid -->
+		<div data-role="popup" id="disclaimer" data-dismissible="false" class="ui-content">
+			<h2>Legal Disclaimer:</h2>
+			<p>This Fertilizer Spread Rates calculator is provided for general information and illustration purposes only; the results are to be used only as estimates and are not intended as definitive advice or as a resource applicable to any specific circumstance and should not be relied upon or used as such. J.R. Simplot Company cannot guarantee your results. </p>
+			<a href="#one" onclick="setAgree();"><input type="button" value="I Agree"></a>
+		</div>
+		<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
+	</div><!-- /content -->
+
+	
+</div>
+<!-- ------------- -->
+<!-- END HOME PAGE -->
+<!-- ------------- -->
+
+
+<!-- -------------- -->
+<!-- ENTER NITROGEN -->
+<!-- -------------- -->
+<div data-role="page" id="enterNit" data-theme="a">
+
+	<div data-role="header">
+		<a href="#one" class="ui-btn ui-icon-home ui-corner-all ui-btn-right ui-btn-icon-notext">Home</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h2>Nitrogen % of Product<a href="#nitInfo2" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" data-rel="popup" data-position-to="window">Info</a></h2>
+		<div data-role="popup" id="nitInfo2" class="ui-content" data-theme="a">
+			<!--<img src="img/turf_gold.jpg" alt="turf gold bag" />-->
+			<p>The three number sequence on a fertilizer bag indicates the N-P-K analysis of the product, with the first number (N) indicating the nitrogen percentage. For example, a fertilizer bag with the numbers 24-4-8 contains 24% nitrogen.</p>
+		</div>
+		<div class="theKnob">
+            <input class="knob" data-min=1 data-max=46 data-angleOffset=-125 data-angleArc=250 data-fgColor="#3C8A2E" data-rotation="clockwise" value=1 data-role="none">
+        </div>
+        <div class="theSlider">
+        	<fieldset class="ui-field-contain">
+            <label for="lbs">Lbs of Actual Nitrogen<a href="#actualNInfo2" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" data-rel="popup" data-position-to="window">Info</a><br><span>Desired Per 1000 ft<sup>2</sup></span></label>
+            <div data-role="popup" id="actualNInfo2" class="ui-content" data-theme="a">
+				<p>This number indicates the actual amount (in lbs) of nitrogen applied per 1000 ft<sup>2</sup>. Check the product datasheet for the suggested rate.</p>
+			</div>
+            <input type="range" name="lbs" id="lbs" value="1" min=".5" max="3" step=".10" />
+            <span class="actualWarning">Check product datasheet for suggested rate.</span>
+          </fieldset>
+        </div>
+   </div>
+   <div class="ui-grid-a">
+   	<h3>Lbs of Product to Apply<a href="#spreadRateInfo2" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" data-rel="popup" data-position-to="window">Info</a></h3>
+   			<div data-role="popup" id="spreadRateInfo2" class="ui-content" data-theme="a">
+				<p>These numbers indicate the actual amount of fertilizer applied (in lbs) per 1000 ft<sup>2</sup> and per acre. Use them to configure your fertilizer spreader settings. Consult your spreader instructions to appropriately calibrate the spreader to the calculated spread rates. </p>
+			</div>
+         <div class="ui-block-a">
+         	<h3>Per 1000 ft<sup>2</sup></h3>
+            <div class="lbsper1000"></div>            
+         </div>
+         <div class="ui-block-b">
+            <h3>Per Acre<sup></sup></h3>
+            <div class="lbsperacre"></div>	
+         </div>
+   </div>
+	<div role="main" class="ui-content promo">
+		<div id="productPromo">
+			
+        </div>
+        <div data-role="popup" id="detailsOffline" class="ui-content">
+			<p>Please connect to the internet to view product details.</p>
+		</div>
+   </div>
+	<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
+</div><!-- /page two -->
+<!-- ------------------ -->
+<!-- END ENTER NITROGEN -->
+<!-- ------------------ -->
+
+<!-- -------------- -->
+<!-- SELECT PRODUCT -->
+<!-- -------------- -->
+<!-- Start of third page -->
+<div data-role="page" id="selectProd" data-theme="a">
+
+	<div data-role="header">
+		<a href="#one" class="ui-btn ui-icon-home ui-corner-all ui-btn-right ui-btn-icon-notext">Home</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h2>Select BEST<sup>&reg;</sup> Product</h2>
+			<ul id="productsList" data-role="listview" data-filter="true"></ul>
+	</div><!-- /content -->
+	<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
+</div><!-- /page popup -->
+<!-- ------------------ -->
+<!-- END SELECT PRODUCT -->
+<!-- ------------------ -->
+
+
+<!-- ---------------- -->
+<!-- SELECTED PRODUCT -->
+<!-- ---------------- -->
+<!-- Start of fourth page -->
+<div data-role="page" id="selectedProd" data-theme="a">
+
+	<div data-role="header">
+		<a href="#selectProd" class="ui-btn ui-icon-arrow-l ui-corner-all ui-btn-icon-notext">Back</a>
+		<a href="#one" class="ui-btn ui-icon-home ui-corner-all ui-btn-icon-notext">Home</a>
+		
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div id="selectedProdTitle"></div>
+		<h3>Nitrogen % of Product<a href="#nitInfo" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" data-rel="popup" data-position-to="window">Info</a></h3>
+		<div data-role="popup" id="nitInfo" class="ui-content" data-theme="a">
+			<!--<img src="img/turf_gold.jpg" alt="turf gold bag" />-->
+			<p>The three number sequence on a fertilizer bag indicates the N-P-K analysis of the product, with the first number (N) indicating the nitrogen percentage. For example, a fertilizer bag with the numbers 24-4-8 contains 24% nitrogen.</p>
+		</div>
+		<div id="selectedProductKnob" class="theKnob">
+			<input class="knob prod" data-min=1 data-max=46 data-readonly=true data-angleOffset=-125 data-angleArc=250 data-fgColor="gray" data-rotation="clockwise" value='1' data-role="none">
+		</div>
+		<div class="theProdSlider">
+        	<fieldset class="ui-field-contain">
+            <label for="lbs">Lbs of Actual Nitrogen<a href="#actualNInfo" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" data-rel="popup" data-position-to="window">Info</a><br><span>Desired Per 1000 ft<sup>2</sup></span></label>
+            <div data-role="popup" id="actualNInfo" class="ui-content" data-theme="a">
+				<p>This number indicates the actual amount (in lbs) of nitrogen applied per 1000 ft<sup>2</sup>. Check the product datasheet for the suggested rate.</p>
+			</div>
+            <input type="range" name="prodlbs" id="prodlbs" value="1" min=".5" max="3" step=".10" />
+            <span class="actualWarning">Check product datasheet for suggested rate.</span>
+          </fieldset>
+        </div>
+   </div>
+   <div class="ui-grid-a">
+   			<h3>Lbs of Product to Apply<a href="#spreadRateInfo" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" data-rel="popup" data-position-to="window">Info</a></h3>
+   			<div data-role="popup" id="spreadRateInfo" class="ui-content" data-theme="a">
+				<p>These numbers indicate the actual amount of fertilizer applied (in lbs) per 1000 ft<sup>2</sup> and per acre. Use them to configure your fertilizer spreader settings. Consult your spreader instructions to appropriately calibrate the spreader to the calculated spread rates. </p>
+			</div>
+         <div class="ui-block-a">
+         	<h3>Per 1000 ft<sup>2</sup></h3>
+            <div class="lbsper1000Prod"></div>
+         </div>
+         <div class="ui-block-b">
+            <h3>Per Acre<sup></sup></h3>
+            <div class="lbsperacreProd"></div>
+         </div>
+   </div>
+   <div role="main" class="ui-content promo">
+   		<div id="selectedProdDetails">
+   	
+		</div>
+		<div data-role="popup" id="datasheetOffline" class="ui-content">
+			<p>Please connect to the internet to view product datasheets.</p>
+		</div>
+	</div>
+	<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
+</div><!-- /page popup -->
+<!-- ------------------ -->
+<!-- END SELECTED PRODUCT -->
+<!-- ------------------ -->
+
+
+<!-- ------------ -->
+<!-- DISTRIBUTORS -->
+<!-- ------------ -->
+<!-- <div data-role="page" id="distributors" data-theme="a">
+	<div data-role="header">
+		<a href="#one" class="ui-btn ui-icon-home ui-corner-all ui-btn-right ui-btn-icon-notext">Home</a>
+	</div>
+
+	<div role="main" class="ui-content">
+		<div id="iframeHolder">
+			
+		</div>
+		<div data-role="popup" id="mapOffline" class="ui-content">
+			<p>Please connect to the internet to continue using the map feature.</p>
+		</div>
+   </div>
+
+	<div class="theFooter" data-role="footer" data-theme="a"></div>
+</div> -->
+
+<!-- ------------- -->
+<!-- PRIVACY POLCY -->
+<!-- ------------- -->
+<div data-role="page" id="privacy" data-theme="a">
+	<div data-role="header">
+		<a href="#one" class="ui-btn ui-icon-home ui-corner-all ui-btn-right ui-btn-icon-notext">Home</a>
+	</div><!-- /header -->
+	<div role="main" class="ui-content">
+		<h2>Privacy Policy</h2>
+		<div id="privacyPolicyText">
+			<div class="ui-loader ui-corner-all ui-body-b ui-loader-default" style="display:block;"><span class="ui-icon-loading"></span><h1>loading</h1></div>
+		</div>
+   </div>
+	<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
+</div><!-- /page popup -->
+<!-- ----------------- -->
+<!-- END PRIVACY POLCY -->
+<!-- ----------------- -->
+
+<!-- ---------- -->
+<!-- DISCLAIMER -->
+<!-- ---------- -->
+<!---Disclaimer Page -->
+<div data-role="page" id="terms">
+	<div data-role="header">
+		<a href="#one" class="ui-btn ui-icon-home ui-corner-all ui-btn-right ui-btn-icon-notext">Home</a>
+	</div><!-- /header -->
+	<div role="main" class="ui-content">
+		<h2>Legal Disclaimer:</h2><p>This Fertilizer Spread Rates calculator is provided for general information and illustration purposes only; the results are to be used only as estimates and are not intended as definitive advice or as a resource applicable to any specific circumstance and should not be relied upon or used as such. J.R. Simplot Company cannot guarantee your results. </p>
+	</div><!-- /content -->
+	<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
+</div><!-- /terms -->
+
+<script src="//localhost:44444/livereload.js"></script>
+</body>
+</html>
