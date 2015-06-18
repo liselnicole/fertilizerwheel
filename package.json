@@ -1,0 +1,10 @@
+{
+  "version": "1.4.0",
+  "versionCode": "4",
+  "devDependencies": {
+    "grunt-contrib-compress": "^0.13.0",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-version": "^1.0.0"
+  }
+}

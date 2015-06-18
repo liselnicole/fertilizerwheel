@@ -1,4 +1,29 @@
 //----------------------------------
+//GEO Location
+//----------------------------------
+
+// onSuccess Callback
+// This method accepts a Position object, which contains the
+// current GPS coordinates
+//
+var currentLocation = {
+    latitude: null,
+    longitude: null
+}
+var onLocationSuccess = function(position) {
+    currentLocation.latitude = position.coords.latitude;
+    currentLocation.longitude = position.coords.longitude;
+
+    //console.log(currentLocation); 
+};
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+    console.log('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}
+//----------------------------------
 //Check for Connection Status
 //----------------------------------
 
@@ -50,6 +75,9 @@ function onLoad() {
             }
             $('#distributorsButton').addClass('ui-state-disabled');
         }
+
+        //Check for location
+        navigator.geolocation.getCurrentPosition(onLocationSuccess, onError);
     } 
     //This is called by the event listener
     function onOnline() {
@@ -105,6 +133,7 @@ function onLoad() {
         //alert('resume');
         getProductsList();
     }
+
 }
 
 //----------------------------------
@@ -333,7 +362,17 @@ function timeStamp() {
     function inAppBrowser(url, page) {
         //alert(url);
         if (online != false) {
-            window.open(url, '_blank', 'location=yes');
+            if (page == 'distributors') {
+                if ((currentLocation.longitude != null) && (currentLocation.latitude != null)) {
+                    window.open(url + '&q=' + currentLocation.latitude + ',' + currentLocation.longitude, '_blank', 'location=yes');
+                }
+                else {
+                    window.open(url, '_blank', 'location=yes');
+                }
+            }
+            else {
+                window.open(url, '_blank', 'location=yes');
+            }
         }
         else {
             if(page == 'selectedProd') {
@@ -389,8 +428,13 @@ function promoProduct(value) {
     var promoIDMatch;
     var localData = JSON.parse(localStorage.getItem('productList'));
     //console.log('local data:' + localData);
+    var $productPromoContainer = $('.ui-content.promo');
     var $productPromo = $('#productPromo');
+    var $footer = $('.ui-footer'); 
+
+    $productPromoContainer.removeClass('gray-background');
     $productPromo.empty();
+    $footer.addClass('stick-bottom');
     $.each(localData.product, function(i, theProduct) {
         //console.log(theProduct.nitrogen_level);
         //console.log(value);
@@ -408,6 +452,8 @@ function promoProduct(value) {
             //var description = theProduct.description.substring(0,theProduct.description.indexOf("<a")); 
             //console.log('index of <a:' + description);
             $productPromo.empty();
+            $footer.removeClass('stick-bottom');
+            $productPromoContainer.removeClass('gray-background');
             $productPromo.append('<h4>Suggested Product</h4>');
             if((theProduct.image_thumbnail != "") && (online == true)
             ) {

@@ -4,17 +4,9 @@
   <title>Fertilizer Spread Rates</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="css/simplotgray.css" />
-  <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
-  <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.4.min.css" /> 
-  <link rel="stylesheet" href="css/custom.css" /> 
-  <script src="js/jquery-1.11.1.min.js"></script> 
-  <script src="js/jquery.knob.js"></script>
-  <script src="js/custom.js"></script>
-  <script src="js/jquery.mobile-1.4.4.min.js"></script> 
-  <!--Include phonegap.js when compiling for production--> 
-  <!--<script src="phonegap.js"></script>-->
-  <!--Include cordova.js when developing on Ripple-->
+  <link rel="stylesheet" type="text/css" href="css/styles.concat.css">
+  <script src="js/scripts.concat.js"></script>
+  <!--Include phonegap.js when compiling for production - include cordova.js when developing on Ripple-->
   <script src="js/cordova.js"></script>
 </head>
 <body onload="onLoad()">
@@ -41,7 +33,7 @@
 	         	</a>
 	         </div>
 	         <div class="third-button landingPageBtn ui-block-b">
-	         	<a href="#" id="distributorsButton" class="firstOption" onclick="inAppBrowser('http://batchgeo.com/map/180a4f2614047605521d8f04d78f79a0', 'distributors')">
+	         	<a href="#" id="distributorsButton" class="firstOption" onclick="inAppBrowser('http://batchgeo.com/map/?i=180a4f2614047605521d8f04d78f79a0', 'distributors')">
 	         	<!-- <a href="#distributors" id="distributorsButton" class="firstOption" data-transition="pop"> -->
 	         		<span class="distMessage"></span>
 	         		<img src="img/location.svg" alt="Best Icon"/>

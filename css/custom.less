@@ -38,7 +38,6 @@ body, .ui-page {
     }
 }
 .ui-grid-a {
-    border-left: 1px solid gray;
     margin-bottom: 15px; 
     h2, h3 {
         margin: 0 0 5px;
@@ -117,7 +116,7 @@ body, .ui-page {
                 -ms-transform: translateY(-50%);
                 transform: translateY(-50%);
             }
-            &.active a:active, a:focus {
+            &.active, &:active, &:focus {
                 background: #85E53B !important;
                 img {
                     opacity: 0.5;
@@ -218,7 +217,9 @@ div[role="application"].ui-slider-track {
 .promo {
     padding: 0;
     margin-bottom: 50px; 
-    background: #DDDDDD;    
+    &.gray-background {
+        background: #DDDDDD;        
+    }
 }
 #productPromo{
     height: 100%;
@@ -233,7 +234,7 @@ div[role="application"].ui-slider-track {
         margin-top:5px; 
         margin-bottom:0; 
         font-size: 16px;
-        line-height: 18px;
+        line-height: 24px;
     }
     a {
         text-shadow: none;
@@ -354,6 +355,11 @@ div[data-role="popup"] p {
 //     bottom:0;
 //     right:0;
 // }
+#enterNit .ui-footer.stick-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+}
 .ui-footer {
     width:100%;
     bottom:0;
@@ -361,6 +367,7 @@ div[data-role="popup"] p {
     height: 50px; 
     position: absolute;
     left: 0;
+    
     .footerlogo {
         display: block;
         margin: 0 auto;

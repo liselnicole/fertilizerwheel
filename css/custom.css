@@ -35,7 +35,6 @@ body,
   margin: 5px 0;
 }
 .ui-grid-a {
-  border-left: 1px solid gray;
   margin-bottom: 15px;
 }
 .ui-grid-a h2,
@@ -112,20 +111,26 @@ body,
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-#one .button-grid .first-button.active a:active,
-#one .button-grid .second-button.active a:active,
-#one .button-grid .third-button.active a:active,
-#one .button-grid .first-button a:focus,
-#one .button-grid .second-button a:focus,
-#one .button-grid .third-button a:focus {
+#one .button-grid .first-button.active,
+#one .button-grid .second-button.active,
+#one .button-grid .third-button.active,
+#one .button-grid .first-button:active,
+#one .button-grid .second-button:active,
+#one .button-grid .third-button:active,
+#one .button-grid .first-button:focus,
+#one .button-grid .second-button:focus,
+#one .button-grid .third-button:focus {
   background: #85E53B !important;
 }
-#one .button-grid .first-button.active a:active img,
-#one .button-grid .second-button.active a:active img,
-#one .button-grid .third-button.active a:active img,
-#one .button-grid .first-button a:focus img,
-#one .button-grid .second-button a:focus img,
-#one .button-grid .third-button a:focus img {
+#one .button-grid .first-button.active img,
+#one .button-grid .second-button.active img,
+#one .button-grid .third-button.active img,
+#one .button-grid .first-button:active img,
+#one .button-grid .second-button:active img,
+#one .button-grid .third-button:active img,
+#one .button-grid .first-button:focus img,
+#one .button-grid .second-button:focus img,
+#one .button-grid .third-button:focus img {
   opacity: 0.5;
 }
 #one .button-grid .first-button {
@@ -201,6 +206,8 @@ div[role="application"].ui-slider-track {
 .promo {
   padding: 0;
   margin-bottom: 50px;
+}
+.promo.gray-background {
   background: #DDDDDD;
 }
 #productPromo {
@@ -217,7 +224,7 @@ div[role="application"].ui-slider-track {
   margin-top: 5px;
   margin-bottom: 0;
   font-size: 16px;
-  line-height: 18px;
+  line-height: 24px;
 }
 #productPromo a {
   text-shadow: none;
@@ -307,6 +314,11 @@ div[data-role="popup"] p {
 }
 #iframeHolder {
   position: relative;
+}
+#enterNit .ui-footer.stick-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 .ui-footer {
   width: 100%;
