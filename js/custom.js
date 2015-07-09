@@ -78,6 +78,8 @@ function onLoad() {
 
         //Check for location
         navigator.geolocation.getCurrentPosition(onLocationSuccess, onError);
+
+        adjustHeightElements();
     } 
     //This is called by the event listener
     function onOnline() {
@@ -290,7 +292,8 @@ function timeStamp() {
             lbsperAcre(value);
         },
         release : function (value) {
-            //console.log(this.$.attr('value'));
+            //console.log('release');
+            //resetSlider();
             lbsper1000(value);
             lbsperAcre(value);
             promoProduct(value);
@@ -396,6 +399,7 @@ function timeStamp() {
 //Call functions on page create
 $(document).on( "pageshow", "#one", function(event, ui) {
     //Prompt user for Agree Statement
+
     function promptAgreement() {
         //alert('popup');
         $("#disclaimer").popup("open");
@@ -407,10 +411,19 @@ $(document).on( "pageshow", "#one", function(event, ui) {
     
     $('.landingPageBtn').on('tap', function() {
         $('.landingPageBtn').removeClass('active'); 
+        var isThirdButton = $(this).hasClass('third-button');
+        //console.log(isThirdButton);
         var isDisabled = $(this).children('a').hasClass('ui-state-disabled');
         //alert(isDisabled);
         if(isDisabled == false) {
             $(this).addClass('active');
+        }
+        if(isThirdButton) {
+            function removeClass() {
+                //console.log('isThirdButton')
+                $('.landingPageBtn').removeClass('active'); 
+            }
+            setTimeout(removeClass, 200);
         }
     });
     

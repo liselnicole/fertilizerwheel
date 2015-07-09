@@ -332,7 +332,6 @@ div[data-role="popup"] p {
   position: relative;
 }
 #enterNit .ui-footer.stick-bottom {
-  position: fixed;
   bottom: 0;
   left: 0;
 }

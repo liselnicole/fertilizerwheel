@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         dest: 'css/styles.concat.css'
       },
       js: {
-        src: ['js/jquery-1.11.1.min.js', 'js/jquery.knob.js', 'js/custom.js', 'js/jquery.mobile-1.4.4.min.js'],
+        src: ['js/jquery-1.11.1.min.js', 'js/jquery.knob.js', 'js/support_vw_vh.js', 'js/custom.js', 'js/jquery.mobile-1.4.4.min.js'],
         dest: 'js/scripts.concat.js'
       }
     },
@@ -54,7 +54,8 @@ module.exports = function(grunt) {
         tasks: ['less']
       },
       js: {
-        files: ['js/custom.js']
+        files: ['js/custom.js', 'js/support_vw_vh.js'],
+        tasks: ['concat:js']
       }
     },
     cssmin: {
@@ -72,24 +73,39 @@ module.exports = function(grunt) {
             from: 'src="js/cordova.js"',
             to: 'src="phonegap.js"'
           }, 
-          // {
-          //   from: '<script src="js/scripts.concat.js"></script>',
-          //   to: '<script src="js/scripts.concat.min.js"></script>'
-          // }, 
           {
-            from: 'href="css/styles.concat.css"',
-            to: 'href="css/styles.concat.min.css"'
+            from: 'css/styles.concat.css',
+            to: 'css/styles.concat.min.css'
+          }, 
+          {
+            from: '<script src="js/scripts.concat.js"></script>',
+            to: '<script src="js/scripts.concat.min.js"></script>'
+          }, 
+          {
+            from: '<script src="//localhost:44444/livereload.js"></script>',
+            to: ''
           }
-          ]
+        ]
       },
       js: {
         src: ['js/scripts.concat.js'],
-        dest: 'build/js/', 
+        dest: 'js/', 
         replacements: [{
             from: 'url: "http://simplot.sundoginteractive.com/services/best_products"', 
             to: 'url: "http://www.simplot.com/services/best_products"'
+          },
+          {
+            from: 'url: "http://simplot.sundoginteractive.com/services/best_products"', 
+            to: 'url: "http://www.simplot.com/services/best_products"'
           }
-          ]
+        ]
+      }
+    },
+    uglify: {
+      my_target: {
+        files: {
+          'build/js/scripts.concat.min.js': ['js/scripts.concat.js']
+        }
       }
     },
     copy: {
@@ -140,6 +156,7 @@ module.exports = function(grunt) {
   
   //Minify css and js
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   
   //Copy files to build dir
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -148,8 +165,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compress');
 
 
-  grunt.registerTask('default', ['watch', 'less', 'concat']);
+  grunt.registerTask('default', ['less', 'concat']);
 
-  grunt.registerTask('production', ['less', 'concat', 'cssmin', 'replace', 'copy', 'compress', ])
+  grunt.registerTask('watchfiles', ['watch', 'less', 'concat']);
+
+  grunt.registerTask('production', ['less', 'concat', 'cssmin', 'replace', 'uglify', 'copy', 'compress']);
 
 };

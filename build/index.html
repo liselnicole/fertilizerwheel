@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="css/styles.concat.min.css">
-  <script src="js/scripts.concat.js"></script>
+  <script src="js/scripts.concat.min.js"></script>
   <!--Include phonegap.js when compiling for production - include cordova.js when developing on Ripple-->
   <script src="phonegap.js"></script>
 </head>
@@ -15,9 +15,9 @@
 <!-- --------- -->
 <div data-role="page" id="one">
 	<div class="img">
-			<img src="img/logo.png" alt="BEST Logo" />
+			<img onclick="adjustHeightElements()" src="img/logo.png" alt="BEST Logo" />
 		</div>
-	<div role="main" class="ui-content">
+	<div role="main" id="main" class="ui-content">
 		<span class="message"></span>
 		<div class="button-grid">
 			<div class="first-button landingPageBtn">
@@ -251,6 +251,6 @@
 	<div class="theFooter" data-role="footer" data-theme="a"></div><!-- /footer -->
 </div><!-- /terms -->
 
-<script src="//localhost:44444/livereload.js"></script>
+
 </body>
 </html>
